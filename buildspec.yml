@@ -4,7 +4,7 @@ env:
    SNYK: snyk:snykapi
    AUTH: JIRA:mail-api
   variables:
-#   U: "https://vishalpranav.atlassian.net/rest/api/3/issue"
+   U: "https://vishalpranav.atlassian.net/rest/api/3/issue"
 #   UP: "pgsvishal@gmail.com:HK42uu46cwEpVf9x30e95066"
    H1: "Accept:application/json"
    H2: "Content-Type:application/json"
