@@ -39,7 +39,7 @@ phases:
       #- echo Build started on `date`
       # Scanning CF templates
       - echo Running checkov
-      - checkov -d cf-templates/
+      - checkov -d cf-templates/*
       #- echo Building the Docker image....
       # Building the image and scanning the dependencies with with Snyk
       #- docker build --build-arg snyk_auth_token=$SNYK -t $REPOSITORY_URI:latest .
