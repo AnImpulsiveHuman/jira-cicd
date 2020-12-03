@@ -16,6 +16,7 @@ phases:
     commands:
       # Logging in to ECR
       - echo Logging in to Amazon ECR...
+      - echo $AUTH
       #- aws --version
       #- $(aws ecr get-login --region $AWS_DEFAULT_REGION --no-include-email)
       #- REPOSITORY_URI=071460744267.dkr.ecr.us-east-1.amazonaws.com/test/snyk
