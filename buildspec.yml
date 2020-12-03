@@ -48,7 +48,7 @@ phases:
       - echo $CODEBUILD_BUILD_SUCCEEDING
       - bash -c "if [ /"$CODEBUILD_BUILD_SUCCEEDING/" == /"1/" ]; then exit 1; fi"
       - echo $CODEBUILD_BUILD_ID
-      - curl --request POST --url $U --user $UP --header $H1 --header $H2 --data '{"fields":{"CodeBuild Build Failed","issuetype":{"name":"Task"},"project":{"key":"TCP"},"description":{"type":"doc","version":1,"content":[{"type":"paragraph","content":[{"text":"Build ID:'$CODEBUILD_BUILD_ID' \n Build Number:{{safeHTML'$CODEBUILD_BUILD_NUMBER'}} \n Webhook Trigger:'$CODEBUILD_WEBHOOK_TRIGGER'","type":"text"}]}]}}}'
+      - curl --request POST --url $U --user $UP --header $H1 --header $H2 --data '{"fields":{"CodeBuild Build Failed","issuetype":{"name":"Task"},"project":{"key":"TCP"},"description":{"type":"doc","version":1,"content":[{"type":"paragraph","content":[{"text":"Build ID:'$CODEBUILD_BUILD_ID' \n Build Number:\{\{safeHTML'$CODEBUILD_BUILD_NUMBER'\}\} \n Webhook Trigger:'$CODEBUILD_WEBHOOK_TRIGGER'","type":"text"}]}]}}}'
       - echo Build completed on `date`
       # Pushing the image to ECR
     # - echo Pushing the Docker images...
