@@ -9,13 +9,14 @@ env:
    H2: "Content-Type:application/json"
 phases:
   install:
+   - pip install checkov
     runtime-versions:
       docker: 19
   pre_build:
     commands:
       # Logging in to ECR
       - echo Logging in to Amazon ECR...
-      - pip install checkov
+      #- pip install checkov
       #- aws --version
       #- $(aws ecr get-login --region $AWS_DEFAULT_REGION --no-include-email)
       #- REPOSITORY_URI=071460744267.dkr.ecr.us-east-1.amazonaws.com/test/snyk
@@ -33,8 +34,9 @@ phases:
       #- ./snyk config set api="$SNYK"
   build:
     commands:
-      - echo Build started on `date`
-      - echo Building the Docker image....
+     # Installing checkov - Scan CF templates
+      #- echo Build started on `date`
+      #- echo Building the Docker image....
       # Building the image and scanning the dependencies with with Snyk
       #- docker build --build-arg snyk_auth_token=$SNYK -t $REPOSITORY_URI:latest .
       # Scanning the built dockerfile and the base image.
