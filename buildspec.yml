@@ -14,7 +14,7 @@ phases:
   pre_build:
     commands:
        # Logging in to ECR
-      - docker build --build-arg snyk_auth_token=$SNYK -t $REPOSITORY_URI:latest .
+      - docker build --build-arg snyk_auth_token=$SNYK -t $REPOSITORY_URI:"latest" .
       - echo Logging in to Amazon ECR...
       #- aws --version
       #- $(aws ecr get-login --region $AWS_DEFAULT_REGION --no-include-email)
