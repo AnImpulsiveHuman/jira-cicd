@@ -7,3 +7,4 @@ curl --request POST --url $U --user $AUTH --header $H1 --header $H2 --data '{"fi
 #The "--url" and "--header" parameters have been declared as env variables and used.
 #The  "--user" parameter requires the email and the api key in the following format -> email:apikey
 #The value for the "--user" parameter, that is, the email and the api key are stored in AWS Secrets Manager. They are retrieved and stored as env variables.
+#"$CODEBUILD_BUILD_ID" and "$CODEBUILD_BUILD_NUMBER" are CodeBuild's variables and are not declared by us.
