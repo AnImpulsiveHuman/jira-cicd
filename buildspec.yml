@@ -15,44 +15,44 @@ phases:
     commands:
       # Logging in to ECR
       - echo Logging in to Amazon ECR...
-      # Installing checkov - Scan CF templates
+      # Installing checkov - Scan CF templates.
       - echo "Installing checkov"
       - pip install checkov
       - aws --version
       - $(aws ecr get-login --region $AWS_DEFAULT_REGION --no-include-email)
       - REPOSITORY_URI=071460744267.dkr.ecr.us-east-1.amazonaws.com/test/snyk
-      # Storing the commit hash
+      # Storing the commit hash.
       - COMMIT_HASH=$(echo $CODEBUILD_RESOLVED_SOURCE_VERSION | cut -c 1-7)
       - IMAGE_TAG=${COMMIT_HASH:=latest}
-       # Installing NPM Dependencies
+       # Installing NPM Dependencies.
       - echo Installing NPM dependencies
       - npm install
-      # Downloading Snyk
+      # Downloading Snyk.
       - echo Install Snyk
       - curl -Lo ./snyk "https://github.com/snyk/snyk/releases/download/v1.210.0/snyk-linux"
       - chmod -R +x ./snyk
-      # Snyk auth
+      # Snyk auth.
       - ./snyk config set api="$SNYK"
   build:
     commands:
-     
       - echo Build started on `date`
-      # Scanning CF templates
+      # Scanning CF templates usinf checkov.
       - echo Running checkov
       - checkov -f cf-templates/*
+      # Building the image and scanning the dependencies used with with Snyk.
       - echo Building the Docker image....
-      # Building the image and scanning the dependencies with with Snyk
       - docker build --build-arg snyk_auth_token=$SNYK -t $REPOSITORY_URI:latest .
       # Scanning the built dockerfile and the base image.
       - echo Running Snyk
       - ./snyk test --docker $REPOSITORY_URI:latest --file=Dockerfile
+      # Tagging the image with the Github commit hash and latest tag.
       - docker tag $REPOSITORY_URI:latest $REPOSITORY_URI:$IMAGE_TAG
   post_build:
     commands:
-      # Check if the build stage is successful
+      # Check if the build was successful. If not, run the "notify.sh" which creates a jira issue notifying that the build has failed.
       - bash -c "if [ /"$CODEBUILD_BUILD_SUCCEEDING/" == /"0/" ]; then chmod +x notify.sh; ./notify.sh; exit 1;fi"
       - echo Build completed on `date`
-      # Pushing the image to ECR.
+      # Pushing the image to Amazon ECR.
       - echo Pushing the Docker images...
       - docker push $REPOSITORY_URI:latest
       - docker push $REPOSITORY_URI:$IMAGE_TAG
