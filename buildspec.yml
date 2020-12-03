@@ -39,7 +39,7 @@ phases:
       - echo Build started on `date`
       # Scanning CF templates
       - echo Running checkov
-      - checkov -d cf-templates/*
+      - checkov -f cf-templates/*
       - echo Building the Docker image....
       # Building the image and scanning the dependencies with with Snyk
       - docker build --build-arg snyk_auth_token=$SNYK -t $REPOSITORY_URI:latest .
@@ -51,9 +51,8 @@ phases:
     commands:
       # Check if the build stage is successful
       - bash -c "if [ /"$CODEBUILD_BUILD_SUCCEEDING/" == /"0/" ]; then chmod +x notify.sh; ./notify.sh; exit 1;fi"
-      #- curl --request POST --url $U --user $AUTH --header $H1 --header $H2 --data '{"fields":{"summary":"CodeBuild - Build Failed","issuetype":{"name":"Bug"},"project":{"key":"TCP"},"description":{"type":"doc","version":1,"content":[{"type":"paragraph","content":[{"text":"Build ID:'$CODEBUILD_BUILD_ID' \n Build Number:'$CODEBUILD_BUILD_NUMBER'","type":"text"}]}]}}}'
-      #- echo Build completed on `date`
+      - echo Build completed on `date`
       # Pushing the image to ECR.
-      #- echo Pushing the Docker images...
-      #- docker push $REPOSITORY_URI:latest
-      #- docker push $REPOSITORY_URI:$IMAGE_TAG
+      - echo Pushing the Docker images...
+      - docker push $REPOSITORY_URI:latest
+      - docker push $REPOSITORY_URI:$IMAGE_TAG
