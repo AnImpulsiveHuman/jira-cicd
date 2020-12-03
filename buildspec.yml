@@ -50,8 +50,7 @@ phases:
   post_build:
     commands:
       # Check if the build stage is successful
-      - |-
-        if [ /"$CODEBUILD_BUILD_SUCCEEDING/" == /"0/" ]; then
+      - if [ /"$CODEBUILD_BUILD_SUCCEEDING/" == /"0/" ]; then
           echo "HEEEEEEEEEEEEEEEEEEEEELLLLLLLLLLLLLLLLLOOOOOOOOOOOOOOOOOOOOOOO"
         else
           echo Pushing the Docker images...
