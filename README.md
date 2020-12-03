@@ -21,8 +21,8 @@ Even though our application does not require any CloudFormation templates, there
 ## Tools
 
 Two opensource tools have been used.
-* Snyk    - Scans the NodeJs dependencies, Dockerfile and the Base Image for known vulnerabilites.
-* Checkov - Checks the CloudFormation templates for misconfiguration that could lead to various security issues.
+* Snyk     - Scans the NodeJs dependencies, Dockerfile and the Base Image for known vulnerabilites.
+* Checkov  - Checks the CloudFormation templates for misconfiguration that could lead to various security issues.
 
 This repo just contains the files used. For a detailed writeup on creating the pipeline along with the deployment phase and integrating Snyk, check out my post here.
 Integrating checkov or most of the other tools for that matter can be done similarly.
