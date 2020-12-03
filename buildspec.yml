@@ -7,8 +7,8 @@ env:
   variables:
 #   U: "https://vishalpranav.atlassian.net/rest/api/3/issue"
 #   UP: "pgsvishal@gmail.com:HK42uu46cwEpVf9x30e95066"
-   UP: $JIRAM:$JIRAA
-#   T: "$JIRAM:$JIRAA"
+#   UP: $JIRAM:$JIRAA
+   T: "$JIRAM:$JIRAA"
 #   T1: '$JIRAM':'$JIRAA'
    H1: "Accept:application/json"
    H2: "Content-Type:application/json"
