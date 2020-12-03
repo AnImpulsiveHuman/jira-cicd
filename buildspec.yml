@@ -7,7 +7,7 @@ env:
    H2: "Content-Type:application/json"
   secrets-manager:
    SNYK: snyk:snykapi
-   JIRAM: JIRA:mail
+   JIRAM: JIRA:email
    JIRAA: JIRA:api
 phases:
   install:
